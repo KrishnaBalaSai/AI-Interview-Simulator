@@ -1,0 +1,256 @@
+[
+  {
+    "category": "Python",
+    "difficulty": "Easy",
+    "title": "Mutable vs Immutable Types",
+    "question_text": "What is the difference between mutable and immutable data types in Python? Provide examples of each.",
+    "options": null,
+    "explanation": "Mutable objects can be modified in-place after creation (e.g. lists, dicts, sets). Immutable objects cannot be altered after creation (e.g. ints, floats, strings, tuples). Modifying an immutable object creates a new object in memory.",
+    "sample_answer": "In Python, mutable objects like lists (`[1, 2]`) and dictionaries (`{'a': 1}`) allow their values or size to change without altering their memory identity (`id()`). Immutable objects such as tuples (`(1, 2)`), strings, and integers cannot be changed; any modification creates a new object.",
+    "tags": [
+      "python",
+      "basics",
+      "memory"
+    ]
+  },
+  {
+    "category": "Python",
+    "difficulty": "Medium",
+    "title": "Generators & Yield Keyword",
+    "question_text": "How do generators work in Python, and how does `yield` differ from `return`? When should you prefer generators?",
+    "options": null,
+    "explanation": "`yield` suspends the function execution and returns a value to the caller, preserving its state (local variables) for when `next()` is called again. Generators yield items lazily, saving memory when processing massive streams or files.",
+    "sample_answer": "Generators produce values on the fly instead of constructing full collections in RAM. When a generator encounters `yield`, it returns the current value and pauses state. This achieves O(1) memory complexity for large streams.",
+    "tags": [
+      "python",
+      "generators",
+      "memory-optimization"
+    ]
+  },
+  {
+    "category": "Python",
+    "difficulty": "Hard",
+    "title": "Global Interpreter Lock (GIL) & Concurrency",
+    "question_text": "Explain Python's Global Interpreter Lock (GIL). What are its implications on CPU-bound vs I/O-bound tasks, and how can one bypass it?",
+    "options": null,
+    "explanation": "The GIL is a mutex protecting access to Python objects, preventing multiple native threads from executing Python bytecode simultaneously. For I/O-bound tasks, `asyncio` or `threading` release the GIL during network/disk calls. For CPU-bound tasks, `multiprocessing` or native C extensions bypass the GIL.",
+    "sample_answer": "The GIL ensures thread-safety for CPython's reference counting memory management. It limits CPU-bound multithreading to a single core. To bypass it for CPU-heavy tasks, use `multiprocessing` or sub-interpreters in Python 3.12+.",
+    "tags": [
+      "python",
+      "concurrency",
+      "gil",
+      "architecture"
+    ]
+  },
+  {
+    "category": "Java",
+    "difficulty": "Easy",
+    "title": "equals() vs == Operator",
+    "question_text": "What is the difference between the `==` operator and the `.equals()` method in Java?",
+    "options": null,
+    "explanation": "`==` checks for reference equality (whether both references point to the exact same memory address). `.equals()` checks for value/state equality as defined by the class implementation.",
+    "sample_answer": "`==` tests reference identity (memory address equality), whereas `equals()` tests semantic or logical equality between objects (e.g. comparing the characters of two String instances).",
+    "tags": [
+      "java",
+      "oop",
+      "basics"
+    ]
+  },
+  {
+    "category": "Java",
+    "difficulty": "Medium",
+    "title": "HashMap Internal Working",
+    "question_text": "How does Java HashMap work internally in Java 8+? Explain hashing, collision handling, and treeification.",
+    "options": null,
+    "explanation": "HashMap uses an array of Node buckets. Key hash is computed and mapped to an index. Collisions use linked lists. In Java 8, when a bucket exceeds 8 nodes and array capacity is >= 64, it treeifies into a Red-Black Tree for O(log n) lookup.",
+    "sample_answer": "Java HashMap hashes keys to determine bucket indices. In Java 8, hash collisions initially form singly linked lists. Once a bucket's size hits 8, it converts to a Red-Black Tree, reducing worst-case lookup from O(N) to O(log N).",
+    "tags": [
+      "java",
+      "collections",
+      "hashmap",
+      "data-structures"
+    ]
+  },
+  {
+    "category": "JavaScript",
+    "difficulty": "Easy",
+    "title": "var vs let vs const",
+    "question_text": "Explain the differences between `var`, `let`, and `const` in modern JavaScript with respect to scoping and hoisting.",
+    "options": null,
+    "explanation": "`var` is function-scoped and hoisted with undefined. `let` and `const` are block-scoped and hoisted into the Temporal Dead Zone (TDZ). `const` prevents reassignment of the variable identifier.",
+    "sample_answer": "`var` is function-scoped and hoists to `undefined`. `let` and `const` have block scope `{}` and cannot be accessed before declaration due to the Temporal Dead Zone. `const` also requires immediate initialization and cannot be reassigned.",
+    "tags": [
+      "javascript",
+      "es6",
+      "scoping"
+    ]
+  },
+  {
+    "category": "JavaScript",
+    "difficulty": "Medium",
+    "title": "Event Loop & Microtask Queue",
+    "question_text": "How does the JavaScript Event Loop work? What is the execution priority between Call Stack, Microtasks (Promises), and Macrotasks (setTimeout)?",
+    "options": null,
+    "explanation": "Synchronous code on the Call Stack executes first. When the stack is empty, all queued Microtasks (Promise.then, queueMicrotask) are drained before the next Macrotask (setTimeout, setInterval, I/O) is processed.",
+    "sample_answer": "JavaScript runs on a single-threaded event loop. Execution order is: 1) Synchronous Call Stack, 2) Complete Microtask queue (Promises, MutationObserver), 3) One Macrotask from Task Queue (setTimeout, I/O), repeating cyclically.",
+    "tags": [
+      "javascript",
+      "async",
+      "event-loop"
+    ]
+  },
+  {
+    "category": "React",
+    "difficulty": "Easy",
+    "title": "Virtual DOM and Reconciliation",
+    "question_text": "What is the Virtual DOM in React, and how does the reconciliation algorithm update the browser UI efficiently?",
+    "options": null,
+    "explanation": "The Virtual DOM is a lightweight in-memory representation of real DOM nodes. On state change, React creates a new tree, diffs it against previous tree using heuristic O(N) algorithm, and batches minimal mutations to the real DOM.",
+    "sample_answer": "The Virtual DOM is an abstraction of the browser DOM. When component state changes, React generates a new VDOM, compares it with the previous snapshot (diffing), and performs batch updates to the real DOM only where changes occurred.",
+    "tags": [
+      "react",
+      "virtual-dom",
+      "rendering"
+    ]
+  },
+  {
+    "category": "React",
+    "difficulty": "Medium",
+    "title": "useEffect Hook Dependencies & Cleanup",
+    "question_text": "Explain how `useEffect` works in React. Why is the dependency array important, and when does the cleanup function execute?",
+    "options": null,
+    "explanation": "`useEffect` lets functional components perform side effects. Omitted dependency array runs after every render; empty array `[]` runs on mount; specified dependencies run when values change. Cleanup runs prior to component unmount or before re-running the effect.",
+    "sample_answer": "`useEffect` manages lifecycle side-effects (subscriptions, DOM mutations, data fetching). The dependency array ensures the effect only re-executes when specified values change. Returning a cleanup function cancels timers or WebSocket subscriptions before unmounting or re-running.",
+    "tags": [
+      "react",
+      "hooks",
+      "lifecycle"
+    ]
+  },
+  {
+    "category": "FastAPI",
+    "difficulty": "Easy",
+    "title": "Pydantic Validation in FastAPI",
+    "question_text": "How does FastAPI utilize Pydantic models for request validation and serialization?",
+    "options": null,
+    "explanation": "FastAPI uses Pydantic models in route parameters. Incoming JSON requests are automatically parsed, type-checked, and validated. Invalid inputs return standard 422 Unprocessable Entity errors with detailed validation traces.",
+    "sample_answer": "Pydantic provides declarative data schemas using Python type annotations. FastAPI validates incoming payloads against these schemas automatically, parses query/body params, and formats outbound responses according to `response_model`.",
+    "tags": [
+      "fastapi",
+      "pydantic",
+      "validation"
+    ]
+  },
+  {
+    "category": "FastAPI",
+    "difficulty": "Medium",
+    "title": "Dependency Injection with Depends",
+    "question_text": "Explain FastAPI's Dependency Injection system (`Depends`). How does it facilitate database sessions and security checks?",
+    "options": null,
+    "explanation": "`Depends` allows modular sharing of logic like database sessions, authentication, and permission checks. Dependencies can be nested and support yield for automatic teardown (closing DB connections).",
+    "sample_answer": "FastAPI's `Depends` resolves shared parameters before executing route handlers. For database sessions, a dependency yields a session and guarantees its closure in a `finally` block, ensuring zero connection leaks and clean separation of concerns.",
+    "tags": [
+      "fastapi",
+      "dependency-injection",
+      "architecture"
+    ]
+  },
+  {
+    "category": "SQL",
+    "difficulty": "Easy",
+    "title": "SQL Joins: INNER, LEFT, RIGHT, FULL",
+    "question_text": "Differentiate between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN with real-world examples.",
+    "options": null,
+    "explanation": "INNER JOIN returns records with matching keys in both tables. LEFT JOIN returns all records from left table and matched from right. RIGHT JOIN returns all from right. FULL OUTER returns all records when there is a match in either table.",
+    "sample_answer": "INNER JOIN yields rows matching both tables. LEFT JOIN preserves every row from the left table, filling right table columns with NULL if no match exists. FULL OUTER JOIN retains all records from both tables regardless of match.",
+    "tags": [
+      "sql",
+      "joins",
+      "queries"
+    ]
+  },
+  {
+    "category": "SQL",
+    "difficulty": "Medium",
+    "title": "Indexes & Performance Optimization",
+    "question_text": "What are B-Tree indexes in relational databases, and what are the trade-offs of adding multiple indexes on a table?",
+    "options": null,
+    "explanation": "B-Tree indexes maintain sorted tree structures providing O(log n) lookups and range scans. Trade-off: indexes speed up SELECT queries but add write latency to INSERT, UPDATE, and DELETE operations while consuming disk space.",
+    "sample_answer": "B-Tree indexes allow the query planner to binary search records instead of performing costly full table scans. While drastically improving read latency on filtered columns, they introduce write overhead on every INSERT/UPDATE/DELETE and consume storage.",
+    "tags": [
+      "sql",
+      "indexing",
+      "performance"
+    ]
+  },
+  {
+    "category": "DSA",
+    "difficulty": "Easy",
+    "title": "Array vs Linked List Complexity",
+    "question_text": "Compare Arrays and Singly Linked Lists regarding access, search, insertion, and deletion time complexities.",
+    "options": null,
+    "explanation": "Arrays provide O(1) random access by index, but O(N) insertion/deletion (due to element shifting). Linked Lists require O(N) access/search, but O(1) insertion/deletion once the pointer to the target node is known.",
+    "sample_answer": "Arrays offer O(1) random memory access but O(N) arbitrary insertions due to element shifts. Singly Linked Lists offer O(1) head insertion/deletion but require O(N) sequential traversal to access arbitrary elements.",
+    "tags": [
+      "dsa",
+      "arrays",
+      "linked-lists"
+    ]
+  },
+  {
+    "category": "DSA",
+    "difficulty": "Medium",
+    "title": "Cycle Detection in Linked Lists",
+    "question_text": "How do you detect a cycle in a linked list in O(N) time and O(1) auxiliary memory? Explain the algorithm.",
+    "options": null,
+    "explanation": "Floyd's Cycle-Finding Algorithm (Tortoise and Hare) uses two pointers: slow moves 1 step, fast moves 2 steps. If a cycle exists, fast will eventually lap and meet slow.",
+    "sample_answer": "Use Floyd's Tortoise and Hare algorithm. Initialize slow and fast pointers at the head. Advance slow by 1 node and fast by 2 nodes per iteration. If fast reaches NULL, there is no cycle. If fast and slow collide, a cycle exists.",
+    "tags": [
+      "dsa",
+      "pointers",
+      "algorithms"
+    ]
+  },
+  {
+    "category": "DBMS",
+    "difficulty": "Medium",
+    "title": "ACID Properties in Relational Databases",
+    "question_text": "Explain the ACID properties of database transactions and why each is essential for financial or critical applications.",
+    "options": null,
+    "explanation": "Atomicity (all or nothing), Consistency (preserves schema constraints), Isolation (concurrent transactions execute independently without dirty reads), Durability (committed changes persist even during system crashes).",
+    "sample_answer": "ACID guarantees transactional integrity. Atomicity ensures all operations succeed or roll back entirely. Consistency enforces integrity rules. Isolation prevents concurrent conflicts (e.g. dirty reads). Durability guarantees committed data survives server crashes.",
+    "tags": [
+      "dbms",
+      "acid",
+      "transactions"
+    ]
+  },
+  {
+    "category": "HR",
+    "difficulty": "Easy",
+    "title": "Tell Me About Yourself",
+    "question_text": "How do you structure your answer to the common opening interview prompt: 'Tell me about yourself'?",
+    "options": null,
+    "explanation": "Use the Present-Past-Future framework: Briefly mention your current role and strengths, touch upon key past achievements and projects, and explain why you are excited for this specific opportunity.",
+    "sample_answer": "Structure using Present, Past, Future: 1) Who you are today and core focus, 2) Key past milestones, technical problem solved, and experience gained, 3) Why this specific position aligns with your trajectory and how you can add immediate value.",
+    "tags": [
+      "hr",
+      "behavioral",
+      "introduction"
+    ]
+  },
+  {
+    "category": "HR",
+    "difficulty": "Medium",
+    "title": "Conflict Resolution in Engineering Teams",
+    "question_text": "Describe how you approach a situation where you and a senior engineer disagree on a technical design or technology choice.",
+    "options": null,
+    "explanation": "Use the STAR method (Situation, Task, Action, Result). Focus on objective data, benchmarks, trade-offs, respectful communication, alignment with product goals, and disagreeing & committing.",
+    "sample_answer": "I focus on objective trade-offs rather than opinions. I evaluate both options using measurable criteria (latency, developer ergonomics, maintenance cost), build a quick prototype or benchmark if needed, and align with the team's overarching mission.",
+    "tags": [
+      "hr",
+      "behavioral",
+      "teamwork"
+    ]
+  }
+]
